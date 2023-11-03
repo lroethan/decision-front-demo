@@ -53,6 +53,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+
 export const SearchResult = ({
   className,
   isLoading,

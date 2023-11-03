@@ -1,38 +1,27 @@
+import OpenAI from "openai";
+
 export const config = {
   runtime: "edge",
 };
 
-const TIDBCLOUD_ENV = {
-  url: process.env.TIDBCLOUD_URL,
-  api_key: process.env.TIDBCLOUD_API_KEY,
-  db: process.env.TIDBCLOUD_DB,
-  cluster_id: process.env.TIDBCLOUD_CLUSTER_ID,
-}
+const openai = new OpenAI({
+  // apiKey: process.env.OPENAI_API_KEY,
+  apiKey: "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"
+});
 
 export default async function handler(req, res) {
   const { searchParams } = new URL(req.url);
   const query = searchParams.get("q");
 
   if (req.method === "GET" && query) {
-    const response = await fetch(TIDBCLOUD_ENV.url, {
-      method: "POST",
-      body: JSON.stringify({
-        cluster_id: TIDBCLOUD_ENV.cluster_id,
-        database: TIDBCLOUD_ENV.db,
-        instruction: query,
-      }),
-      headers: {
-        "api-key": TIDBCLOUD_ENV.api_key,
-      },
+    const chatCompletion = await openai.chat.completions.create({
+    messages: [{ role: "user", content: query }],
+    model: "gpt-3.5-turbo",
     });
-
-    return new Response(await response.text(), {
-      status: 200,
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+  
+    const response = chatCompletion.choices[0].message.content;
+    
+    return res.status(200).json({ response });
   }
-
   res.status(200).json({ name: "John Doe" });
 }

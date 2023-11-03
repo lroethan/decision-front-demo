@@ -1,24 +1,24 @@
 export const config = {
-  title: "Fortune 500 Q&A",
+  title: "华东师范大学智能决策实验室",
   suggestions: [
     {
-      title: "Distribution",
+      title: "找方法",
       content:
-        "What's the country distribution of global 500 companies in 2022?",
+        "什么方法是在长时间序列预测上表现最好的？",
     },
     {
-      title: "Profit",
-      content: "What are the top 10 companies by profit in 2022?",
+      title: "看性能",
+      content: "请问 AutoCTS 在 ETTh1 数据集上表现如何？",
     },
     {
-      title: "Growth",
+      title: "寻场景",
       content:
-        "Which 10 companies had the highest revenue increase from 2018 to 2022?",
+        "请问 LightPath 方法适合什么场景？一般在什么数据集上完成？",
     },
     {
-      title: "Efficiency",
+      title: "做决策",
       content:
-        "Top 10 companies generate the most profit with every employee in 2022?",
+        "请问 MagicScaler 能在 ETTh 数据集上达到什么样的表现？",
     },
   ],
 };
